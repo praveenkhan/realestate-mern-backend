@@ -7,6 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 
+// Use environment-aware base URL for backend API
+const API =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://your-backend.onrender.com";
+
 const Contact = () => {
   const { toast } = useToast();
 
@@ -34,7 +40,7 @@ const Contact = () => {
     setSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
+      const res = await fetch(`${API}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
